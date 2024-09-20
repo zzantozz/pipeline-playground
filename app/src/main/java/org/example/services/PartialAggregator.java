@@ -1,12 +1,16 @@
-package org.example;
+package org.example.services;
 
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.example.core.AbstractKafkaConsumerProducer;
+import org.example.core.KeyValue;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PartialAggregator extends AbstractKafkaConsumerProducer {
+public class PartialAggregator extends AbstractKafkaConsumerProducer<String, String, String, String> {
     public static final String INPUT_TOPIC = "random-filtered-data";
 
     public PartialAggregator() {
@@ -23,7 +27,11 @@ public class PartialAggregator extends AbstractKafkaConsumerProducer {
     }
 
     @Override
-    protected List<KeyValue> transform(ConsumerRecords records) {
-        return List.of();
+    protected List<KeyValue<String, String>> transform(ConsumerRecords<String, String> records) {
+        List<KeyValue<String, String>> result = new ArrayList<>();
+        for (ConsumerRecord<String, String> record : records) {
+            result.add(new KeyValue<>(record.key(), record.value()));
+        }
+        return result;
     }
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.core;
 
 import java.util.Map;
 
@@ -7,16 +7,16 @@ import java.util.Map;
  * send it to /dev/null instead of processing it any further.
  */
 public class DropRule {
-    private String account;
+    private String id;
     private String fieldMatch;
     private String valueMatch;
 
-    public String getAccount() {
-        return account;
+    public String getId() {
+        return id;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFieldMatch() {

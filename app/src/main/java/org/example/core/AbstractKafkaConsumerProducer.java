@@ -1,6 +1,5 @@
-package org.example;
+package org.example.core;
 
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -8,7 +7,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.Deserializer;
 import org.apache.kafka.common.serialization.Serializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -50,7 +48,7 @@ public abstract class AbstractKafkaConsumerProducer<IK, IV, OK, OV> {
 
     private KafkaProducer<OK, OV> getProducer(IOSpec ioSpec) {
         Properties props = new Properties();
-        props.put("bootstrap.servers", "localhost:9092");
+        props.put("bootstrap.servers", Settings.KAFKA_HOST + ":9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
@@ -63,7 +61,7 @@ public abstract class AbstractKafkaConsumerProducer<IK, IV, OK, OV> {
 
     private KafkaConsumer<IK, IV> getConsumer(IOSpec ioSpec) {
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "localhost:9092");
+        props.setProperty("bootstrap.servers", Settings.KAFKA_HOST + ":9092");
         props.setProperty("group.id", "app-consumer-" + getClass().getSimpleName());
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");

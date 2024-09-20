@@ -35,6 +35,10 @@ dependencies {
     implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.8.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.2'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.4'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.16'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.16'
+    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.9.0'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.4.56.v20240826'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

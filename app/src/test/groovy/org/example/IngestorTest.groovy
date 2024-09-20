@@ -3,6 +3,7 @@
  */
 package org.example
 
+import org.example.services.Ingestor
 import spock.lang.Specification
 
 class IngestorTest extends Specification {

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.core;
 
 public class KeyValue<K, V> {
     public final K key;

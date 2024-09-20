@@ -1,5 +1,6 @@
-package org.example;
+package org.example.core;
 
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -17,8 +18,10 @@ public class TopicBasedConfiguration<K, V> implements Runnable {
 
     public TopicBasedConfiguration(String topicName, String description, String keyDeserializer, String valueDeserializer) {
         Properties props = new Properties();
-        props.setProperty("bootstrap.servers", "localhost:9092");
-        props.setProperty("group.id", "config-consumer-" + description);
+        props.setProperty("bootstrap.servers", Settings.KAFKA_HOST + ":9092");
+        // Use a random group id to always consume the entire topic at startup, building the configuration.
+        props.setProperty("group.id", "config-consumer-" + description + UUID.randomUUID());
+        props.setProperty(AUTO_OFFSET_RESET_CONFIG, "earliest");
         props.setProperty("enable.auto.commit", "true");
         props.setProperty("auto.commit.interval.ms", "1000");
         props.setProperty("key.deserializer", keyDeserializer);

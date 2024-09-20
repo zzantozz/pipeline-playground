@@ -1,8 +1,10 @@
-package org.example;
+package org.example.services;
 
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.example.core.AbstractKafkaConsumerProducer;
+import org.example.core.KeyValue;
 
 import java.util.List;
 
