@@ -1,8 +1,4 @@
-package org.example.globalstate.services;
-
-import org.example.globalstate.core.KeyValue;
-import org.example.globalstate.core.Marshaller;
-import org.example.globalstate.core.Person;
+package org.example.globalstate.core;
 
 import java.util.Map;
 import java.util.regex.Matcher;

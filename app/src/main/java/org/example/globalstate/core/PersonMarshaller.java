@@ -1,4 +1,4 @@
-package org.example.globalstate.services;
+package org.example.globalstate.core;
 
 import org.example.globalstate.core.KeyValue;
 import org.example.globalstate.core.Marshaller;

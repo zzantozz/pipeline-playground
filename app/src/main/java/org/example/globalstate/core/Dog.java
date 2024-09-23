@@ -1,4 +1,4 @@
-package org.example.globalstate.services;
+package org.example.globalstate.core;
 
 public record Dog(String name, int legs) {
     @Override

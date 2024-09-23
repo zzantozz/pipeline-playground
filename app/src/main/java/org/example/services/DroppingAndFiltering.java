@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class DroppingDebatcher extends AbstractKafkaConsumerProducer<String, String, String, String> {
+public class DroppingAndFiltering extends AbstractKafkaConsumerProducer<String, String, String, String> {
 
     private final TopicBasedConfiguration<String, DropRule> dropRules;
     private final TopicBasedConfiguration<String, TelemetryQuery> queries;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final DataPointArchiver dataPointArchiver = new DataPointArchiver();
 
-    public DroppingDebatcher() {
+    public DroppingAndFiltering() {
         super(Ingestor.INGEST_TOPIC, PartialAggregator.INPUT_TOPIC, new IOSpec(
                 StringDeserializer.class, StringDeserializer.class, StringSerializer.class, StringSerializer.class
         ));
@@ -31,12 +31,12 @@ public class DroppingDebatcher extends AbstractKafkaConsumerProducer<String, Str
     }
 
     public static void main(String[] args) {
-        DroppingDebatcher droppingDebatcher = new DroppingDebatcher();
+        DroppingAndFiltering droppingAndFiltering = new DroppingAndFiltering();
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.submit(droppingDebatcher.dropRules);
-        executorService.submit(droppingDebatcher.queries);
+        executorService.submit(droppingAndFiltering.dropRules);
+        executorService.submit(droppingAndFiltering.queries);
         while (true) {
-            droppingDebatcher.poll();
+            droppingAndFiltering.poll();
         }
     }
 
